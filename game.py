@@ -24,13 +24,25 @@ class Twenty48():
             # Check if board is full (game over)
             if not any(0 in subl for subl in self.board):
                 return False
+            value = 4 if np.random.rand() > 0.9 else 2  # Select value of tile
             # Keep repeating until coordinate is selected that is empty
             while True:
                 x_coord = np.random.randint(self.size)
                 y_coord = np.random.randint(self.size)
-                value = 4 if np.random.rand() > 0.9 else 2  # Select value of tile
                 # Add value to board at coordinate if the coordinate is empty
                 if self.board[y_coord][x_coord] == 0:
                     self.board[x_coord][y_coord] = value
                     break
         return True
+
+    def shift_up(self):
+        pass
+
+    def shift_right(self):
+        pass
+
+    def shift_down(self):
+        pass
+
+    def shift_left(self):
+        pass
