@@ -17,6 +17,7 @@ class Twenty48():
         self.board[0][1] = 2 # temp test
         self.board[0][2] = 2
         self.shift_left()
+        print(self.board)
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -48,14 +49,21 @@ class Twenty48():
         pass
 
     def shift_left(self):
-        newBoard = self.board  # New values must be commited at once, not constantly
-        row_iterator = 0
-        for row in self.board:
-            value_iterator = 0
-            for value in row:
-                pdb.set_trace()
-                # Shift value left if value to right is zero
-                while newBoard[row_iterator][value_iterator] == 0 and value_iterator != self.size:
-                    newBoard[row_iterator][value_iterator] = newBoard[row_iterator][value_iterator+1]
-                value_iterator += 1
-            row_iterator += 1
+        for row_iterator in range(0, len(self.board)):
+            # Add values if iterated is same as next value
+            for value_iterator in range(0, len(self.board[row_iterator]) - 1):
+                # Move zeroes to end of list
+                n = len(self.board[row_iterator])
+                self.board[row_iterator][:] = filter(None, self.board[row_iterator])
+                self.board[row_iterator].extend([0] * (n - len(self.board[row_iterator])))
+                # End of sort
+                if self.board[value_iterator] == self.board[value_iterator+1]:
+                    # Add equal value adjacent tiles
+                    self.board[row_iterator][value_iterator] = self.board[value_iterator] * 2
+                    # Zero out added tile
+                    self.board[row_iterator][value_iterator+1] = 0
+                    # Resort to account for added zero
+                    n = len(self.board[row_iterator])
+                    self.board[row_iterator][:] = filter(None, self.board[row_iterator])
+                    self.board[row_iterator].extend([0] * (n - len(self.board[row_iterator])))
+                    # End of sort
