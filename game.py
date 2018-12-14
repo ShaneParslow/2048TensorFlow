@@ -1,5 +1,5 @@
 import numpy as np
-
+import pdb
 
 class Twenty48():
     """Simple 2048 game played on a matrix."""
@@ -13,7 +13,10 @@ class Twenty48():
 
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        self.add_to_board(2)
+        #self.add_to_board(2)
+        self.board[0][1] = 2 # temp test
+        self.board[0][2] = 2
+        self.shift_left()
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -45,4 +48,14 @@ class Twenty48():
         pass
 
     def shift_left(self):
-        pass
+        newBoard = self.board  # New values must be commited at once, not constantly
+        row_iterator = 0
+        for row in self.board:
+            value_iterator = 0
+            for value in row:
+                pdb.set_trace()
+                # Shift value left if value to right is zero
+                while newBoard[row_iterator][value_iterator] == 0 and value_iterator != self.size:
+                    newBoard[row_iterator][value_iterator] = newBoard[row_iterator][value_iterator+1]
+                value_iterator += 1
+            row_iterator += 1
