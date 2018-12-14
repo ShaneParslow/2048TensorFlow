@@ -3,7 +3,7 @@ import tensorflow as tf
 
 
 class Twenty48():
-"""Simple 2048 game played on a matrix."""
+    """Simple 2048 game played on a matrix."""
 
     def __init__(self, dimensions=4):
         """Create game board matrix and create 2 random numbers on the board.
@@ -23,7 +23,7 @@ class Twenty48():
         """
         for i in range(num):
             #Keep repeating until coordinate is selected that is empty.
-            while collision:
+            while True:
                 x_coord = np.random.randint(self.size)
                 y_coord = np.random.randint(self.size)
                 value = 4 if np.random.rand() > 0.9 else 2  # Select value of tile
