@@ -11,9 +11,8 @@ class Twenty48():
         """
         self.size = dimensions
 
-        #create empty board filled with zeroes of size provided
+        # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        self.add_to_board(2)
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -21,7 +20,10 @@ class Twenty48():
         num -- number of random numbers to place on board
         """
         for i in range(num):
-            #Keep repeating until coordinate is selected that is empty.
+            # Check if board is full (game over)
+            if not any(0 in subl for subl in self.board):
+                return False
+            # Keep repeating until coordinate is selected that is empty
             while True:
                 x_coord = np.random.randint(self.size)
                 y_coord = np.random.randint(self.size)
@@ -30,3 +32,4 @@ class Twenty48():
                 if self.board[y_coord][x_coord] == 0:
                     self.board[x_coord][y_coord] = value
                     break
+        return True
