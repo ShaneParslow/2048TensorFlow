@@ -31,7 +31,7 @@ class Twenty48():
                 y_coord = np.random.randint(self.size)
                 # Add value to board at coordinate if the coordinate is empty
                 if self.board[y_coord][x_coord] == 0:
-                    self.board[x_coord][y_coord] = value
+                    self.board[y_coord][x_coord] = value
                     break
         return True
 
