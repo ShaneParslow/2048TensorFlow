@@ -52,7 +52,7 @@ class Twenty48():
         for row_iterator in range(0, len(self.board)):
             # Add values if iterated is same as next value
             for value_iterator in range(0, len(self.board[row_iterator]) - 1):
-                # Move zeroes to end of list
+                # THIS SORTIG WORKS. SOMETHING ELSE IS BROKEN (in theory)
                 n = len(self.board[row_iterator])
                 self.board[row_iterator][:] = filter(None, self.board[row_iterator])
                 self.board[row_iterator].extend([0] * (n - len(self.board[row_iterator])))
