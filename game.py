@@ -14,8 +14,6 @@ class Twenty48():
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.add_to_board(2)
-        print(np.matrix(self.board))
-        self.shift_up()
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -53,8 +51,11 @@ class Twenty48():
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
         self.board = np.transpose(self.board)
-        # Add new value to board after this move
-        self.add_to_board(1)
+        # Add new value to board after move, check if game is lost.
+        if self.add_to_board(1) == True:
+            return True
+        else:
+            return False
 
     def shift_right(self):
         for row_iterator in range(0,len(self.board)):
@@ -69,8 +70,11 @@ class Twenty48():
                     self.board[row_iterator][value_iterator+1] = 0
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
-        # Add new value to board after this move
-        self.add_to_board(1)
+        # Add new value to board after move, check if game is lost.
+        if self.add_to_board(1) == True:
+            return True
+        else:
+            return False
 
     def shift_down(self):
         # Invert list to make this the same problem as moving horizontally
@@ -88,8 +92,11 @@ class Twenty48():
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
         self.board = np.transpose(self.board)
-        # Add new value to board after this move
-        self.add_to_board(1)
+        # Add new value to board after move, check if game is lost.
+        if self.add_to_board(1) == True:
+            return True
+        else:
+            return False
 
     def shift_left(self):
         for row_iterator in range(0,len(self.board)):
@@ -104,5 +111,8 @@ class Twenty48():
                     self.board[row_iterator][value_iterator+1] = 0
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
-        # Add new value to board after this move
-        self.add_to_board(1)
+        # Add new value to board after move, check if game is lost.
+        if self.add_to_board(1) == True:
+            return True
+        else:
+            return False
