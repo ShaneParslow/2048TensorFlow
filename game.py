@@ -17,7 +17,7 @@ class Twenty48():
         self.board[0][1] = 2 # temp test
         self.board[0][2] = 2
         self.shift_left()
-        print(self.board)
+        #print(self.board)
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -49,21 +49,7 @@ class Twenty48():
         pass
 
     def shift_left(self):
-        for row_iterator in range(0, len(self.board)):
-            # Add values if iterated is same as next value
-            for value_iterator in range(0, len(self.board[row_iterator]) - 1):
-                # THIS SORTIG WORKS. SOMETHING ELSE IS BROKEN (in theory)
-                n = len(self.board[row_iterator])
-                self.board[row_iterator][:] = filter(None, self.board[row_iterator])
-                self.board[row_iterator].extend([0] * (n - len(self.board[row_iterator])))
-                # End of sort
-                if self.board[value_iterator] == self.board[value_iterator+1]:
-                    # Add equal value adjacent tiles
-                    self.board[row_iterator][value_iterator] = self.board[value_iterator] * 2
-                    # Zero out added tile
-                    self.board[row_iterator][value_iterator+1] = 0
-                    # Resort to account for added zero
-                    n = len(self.board[row_iterator])
-                    self.board[row_iterator][:] = filter(None, self.board[row_iterator])
-                    self.board[row_iterator].extend([0] * (n - len(self.board[row_iterator])))
-                    # End of sort
+        row_iterator = 0  # Temp row to test
+        for value_iterator in range(0,len(self.board[row_iterator])):
+            self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+            print(self.board[row_iterator])
