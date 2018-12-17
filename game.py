@@ -15,7 +15,7 @@ class Twenty48():
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.add_to_board(2)
         print(np.matrix(self.board))
-        self.shift_left()
+        self.shift_right()
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -41,7 +41,18 @@ class Twenty48():
         pass
 
     def shift_right(self):
-        pass
+        for row_iterator in range(0,len(self.board)):
+            # Sort values to end of list
+            self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+            for value_iterator in range(0,len(self.board[row_iterator])-1):
+                current_value = self.board[row_iterator][value_iterator]
+                next_value = self.board[row_iterator][value_iterator+1]
+                
+                if current_value == next_value:
+                    self.board[row_iterator][value_iterator] = current_value*2
+                    self.board[row_iterator][value_iterator+1] = 0
+                    # Sort again
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
 
     def shift_down(self):
         pass
