@@ -47,8 +47,7 @@ class Twenty48():
         pass
 
     def shift_left(self):
-        row_iterator = 0  # Temp row to test
-        for row_iterator in range(0,len(self.board)-1):
+        for row_iterator in range(0,len(self.board)):
             # Sort values to end of list
             self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
             for value_iterator in range(0,len(self.board[row_iterator])-1):
