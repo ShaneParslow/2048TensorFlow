@@ -15,7 +15,7 @@ class Twenty48():
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.add_to_board(2)
         print(np.matrix(self.board))
-        self.shift_right()
+        self.shift_up()
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -38,7 +38,23 @@ class Twenty48():
         return True
 
     def shift_up(self):
-        pass
+        # Invert list to make this the same problem as moving horizontally
+        self.board = np.transpose(self.board)
+        for row_iterator in range(0,len(self.board)):
+            # Sort values to end of list
+            self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+            for value_iterator in range(0,len(self.board[row_iterator])-1):
+                current_value = self.board[row_iterator][value_iterator]
+                next_value = self.board[row_iterator][value_iterator+1]
+                
+                if current_value == next_value:
+                    self.board[row_iterator][value_iterator] = current_value*2
+                    self.board[row_iterator][value_iterator+1] = 0
+                    # Sort again
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+        self.board = np.transpose(self.board)
+        # Add new value to board after this move
+        self.add_to_board(1)
 
     def shift_right(self):
         for row_iterator in range(0,len(self.board)):
@@ -53,9 +69,27 @@ class Twenty48():
                     self.board[row_iterator][value_iterator+1] = 0
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+        # Add new value to board after this move
+        self.add_to_board(1)
 
     def shift_down(self):
-        pass
+        # Invert list to make this the same problem as moving horizontally
+        self.board = np.transpose(self.board)
+        for row_iterator in range(0,len(self.board)):
+            # Sort values to end of list
+            self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+            for value_iterator in range(0,len(self.board[row_iterator])-1):
+                current_value = self.board[row_iterator][value_iterator]
+                next_value = self.board[row_iterator][value_iterator+1]
+                
+                if current_value == next_value:
+                    self.board[row_iterator][value_iterator] = current_value*2
+                    self.board[row_iterator][value_iterator+1] = 0
+                    # Sort again
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+        self.board = np.transpose(self.board)
+        # Add new value to board after this move
+        self.add_to_board(1)
 
     def shift_left(self):
         for row_iterator in range(0,len(self.board)):
@@ -70,3 +104,5 @@ class Twenty48():
                     self.board[row_iterator][value_iterator+1] = 0
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+        # Add new value to board after this move
+        self.add_to_board(1)
