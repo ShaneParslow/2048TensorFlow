@@ -13,12 +13,9 @@ class Twenty48():
 
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        #self.add_to_board(2)
-        self.board[0][0] = 2 # temp test
-        self.board[0][1] = 2
-        self.board[0][2] = 2
+        self.add_to_board(2)
+        print(np.matrix(self.board))
         self.shift_left()
-        #print(self.board)
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
@@ -51,15 +48,15 @@ class Twenty48():
 
     def shift_left(self):
         row_iterator = 0  # Temp row to test
-        # Sort values to end of list
-        self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
-        for value_iterator in range(0,len(self.board[row_iterator])-1):
-            current_value = self.board[row_iterator][value_iterator]
-            next_value = self.board[row_iterator][value_iterator+1]
-            
-            if current_value == next_value:
-                self.board[row_iterator][value_iterator] = current_value*2
-                self.board[row_iterator][value_iterator+1] = 0
-                # Sort again
-                self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
-            print(self.board[row_iterator])
+        for row_iterator in range(0,len(self.board)-1):
+            # Sort values to end of list
+            self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+            for value_iterator in range(0,len(self.board[row_iterator])-1):
+                current_value = self.board[row_iterator][value_iterator]
+                next_value = self.board[row_iterator][value_iterator+1]
+                
+                if current_value == next_value:
+                    self.board[row_iterator][value_iterator] = current_value*2
+                    self.board[row_iterator][value_iterator+1] = 0
+                    # Sort again
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
