@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
+import numpy as np  #Seemingly only required for windows
 
-import tensorflow as tf
-import numpy as np
+import game
 
-class twenty48():
-    def __init__(self, size):
-        #create empty board filled with zeroes of size provided
-        self.board = [[0] * size] * size
 
-game = twenty48(3)
-print(np.matrix(game.board))
+t48 = game.Twenty48()
+print(np.matrix(t48.board))
+print(t48.score)
