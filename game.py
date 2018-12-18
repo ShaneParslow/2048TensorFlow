@@ -10,9 +10,10 @@ class Twenty48():
         dimensions -- length and width of game board (4 by default)
         """
         self.size = dimensions
-
+        self.score = 0
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
+        # Create initial two random tiles
         self.add_to_board(2)
 
     def add_to_board(self, num):
@@ -36,6 +37,7 @@ class Twenty48():
         return True
 
     def shift_up(self):
+        score_to_add = 0
         # Invert list to make this the same problem as moving horizontally
         self.board = np.transpose(self.board)
         for row_iterator in range(0,len(self.board)):
@@ -48,16 +50,19 @@ class Twenty48():
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
                     self.board[row_iterator][value_iterator+1] = 0
+                    score_to_add += current_value*2 # Add merged block to score
                     # Sort again
-                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)  
         self.board = np.transpose(self.board)
         # Add new value to board after move, check if game is lost.
         if self.add_to_board(1) == True:
+            self.score += score_to_add
             return True
         else:
             return False
 
     def shift_right(self):
+        score_to_add = 0
         for row_iterator in range(0,len(self.board)):
             # Sort values to end of list
             self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
@@ -68,15 +73,18 @@ class Twenty48():
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
                     self.board[row_iterator][value_iterator+1] = 0
+                    score_to_add += current_value*2 # Add merged block to score
                     # Sort again
-                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)  
         # Add new value to board after move, check if game is lost.
         if self.add_to_board(1) == True:
+            self.score += score_to_add
             return True
         else:
             return False
 
     def shift_down(self):
+        score_to_add = 0
         # Invert list to make this the same problem as moving horizontally
         self.board = np.transpose(self.board)
         for row_iterator in range(0,len(self.board)):
@@ -89,16 +97,19 @@ class Twenty48():
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
                     self.board[row_iterator][value_iterator+1] = 0
+                    score_to_add += current_value*2 # Add merged blocks to score
                     # Sort again
-                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)  
         self.board = np.transpose(self.board)
         # Add new value to board after move, check if game is lost.
         if self.add_to_board(1) == True:
+            self.score += score_to_add
             return True
         else:
             return False
 
     def shift_left(self):
+        score_to_add = 0
         for row_iterator in range(0,len(self.board)):
             # Sort values to end of list
             self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
@@ -109,10 +120,12 @@ class Twenty48():
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
                     self.board[row_iterator][value_iterator+1] = 0
+                    score_to_add += current_value*2 # Add merged block to score
                     # Sort again
-                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)
+                    self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0)  
         # Add new value to board after move, check if game is lost.
         if self.add_to_board(1) == True:
+            self.score += score_to_add
             return True
         else:
             return False
