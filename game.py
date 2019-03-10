@@ -15,7 +15,10 @@ class Twenty48():
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         # Create initial two random tiles
-        self.add_to_board(2)
+        #self.add_to_board(2)
+        self.board[0][0] = 2
+        self.board[0][1] = 2
+        self.board[0][2] = 2
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
