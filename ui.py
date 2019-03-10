@@ -20,4 +20,6 @@ def update_ui(board):
         for label_iterator in range(0,len(row)):
             new_value = board[row_iterator][label_iterator]
             ui_board[row_iterator][label_iterator].config(text=new_value)
+            print("update" + str(new_value))
             # TODO: LOTS OF IFS FOR VALUE COLORS
+        row_iterator += 1
