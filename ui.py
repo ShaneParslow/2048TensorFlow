@@ -19,11 +19,13 @@ def init_ui(size):
 
 def update_ui(board):
     row_iterator = 0
+    # Update all labels with backend values
     for row in ui_board:
         for label_iterator in range(0,len(row)):
             new_value = board[row_iterator][label_iterator]
             try:
               ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
+            # If color is not in dictionary fallback to red
             except KeyError:
                 ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
         row_iterator += 1
