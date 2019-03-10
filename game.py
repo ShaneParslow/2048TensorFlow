@@ -17,8 +17,8 @@ class Twenty48():
         # Create initial two random tiles
         #self.add_to_board(2)
         self.board[0][0] = 2
-        self.board[0][1] = 2
-        self.board[0][2] = 2
+        self.board[1][0] = 2
+        self.board[2][0] = 2
 
     def add_to_board(self, num):
         """Add 2 or 4 to game board. 90% chance of 2, 10% chance of 4.
