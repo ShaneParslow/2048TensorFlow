@@ -6,6 +6,8 @@ import ui
 
 
 t48 = game.Twenty48()
+ui.init_ui(t48.size)
+
 while True:
     print(np.matrix(t48.board))
     print(t48.score)
