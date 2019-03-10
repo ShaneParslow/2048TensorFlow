@@ -7,9 +7,9 @@ import ui
 
 
 t48 = game.Twenty48()
-ui.init_ui(t48.size)
+ui.init_ui(t48)
 
 while True:
     print(np.matrix(t48.board))
-    ui.update_ui(t48.board)
+    ui.update_ui(t48)
     tk.mainloop()
