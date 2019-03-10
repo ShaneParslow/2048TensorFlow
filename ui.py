@@ -6,6 +6,7 @@ colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D
 def init_ui(game):
     global window
     global ui_board
+    global score
     window = tk.Tk()
 
     # Fill UI board with zeroes
@@ -16,6 +17,9 @@ def init_ui(game):
         for label_iterator in range(0,len(row)):
             ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator,ipadx=10,ipady=10)
         row_iterator += 1
+    # Create score label at bottom of screen
+    score = tk.Label(text=game.score+1)
+    score.grid(row=game.size,column=0)
     # Bind arrow keys to shift board
     window.bind("<Up>", lambda a: game.shift_up())
     window.bind("<Right>", lambda a: game.shift_right())
@@ -34,3 +38,4 @@ def update_ui(game):
             except KeyError:
                 ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
         row_iterator += 1
+    score.config(text=game.score)
