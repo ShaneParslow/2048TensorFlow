@@ -14,5 +14,10 @@ def init_ui(size):
             ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator,ipadx=10,ipady=10)
         row_iterator += 1
 
-def update_ui():
-    pass
+def update_ui(board):
+    row_iterator = 0
+    for row in ui_board:
+        for label_iterator in range(0,len(row)):
+            new_value = board[row_iterator][label_iterator]
+            ui_board[row_iterator][label_iterator].config(text=new_value)
+            # TODO: LOTS OF IFS FOR VALUE COLORS
