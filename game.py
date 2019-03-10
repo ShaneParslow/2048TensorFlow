@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import numpy as np
 import pdb
 
@@ -66,13 +67,13 @@ class Twenty48():
         for row_iterator in range(0,len(self.board)):
             # Sort values to end of list
             self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
-            for value_iterator in range(0,len(self.board[row_iterator])-1):
+            for value_iterator in range(len(self.board[row_iterator])-1,0,-1):
                 current_value = self.board[row_iterator][value_iterator]
-                next_value = self.board[row_iterator][value_iterator+1]
+                next_value = self.board[row_iterator][value_iterator-1]
                 
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
-                    self.board[row_iterator][value_iterator+1] = 0
+                    self.board[row_iterator][value_iterator-1] = 0
                     score_to_add += current_value*2 # Add merged block to score
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)  
@@ -90,13 +91,13 @@ class Twenty48():
         for row_iterator in range(0,len(self.board)):
             # Sort values to end of list
             self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)
-            for value_iterator in range(0,len(self.board[row_iterator])-1):
+            for value_iterator in range(len(self.board[row_iterator])-1,0,-1):
                 current_value = self.board[row_iterator][value_iterator]
-                next_value = self.board[row_iterator][value_iterator+1]
+                next_value = self.board[row_iterator][value_iterator-1]
                 
                 if current_value == next_value:
                     self.board[row_iterator][value_iterator] = current_value*2
-                    self.board[row_iterator][value_iterator+1] = 0
+                    self.board[row_iterator][value_iterator-1] = 0
                     score_to_add += current_value*2 # Add merged blocks to score
                     # Sort again
                     self.board[row_iterator] = sorted(self.board[row_iterator], key=lambda x: x == 0, reverse=True)  
