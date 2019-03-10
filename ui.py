@@ -1,5 +1,8 @@
 import tkinter as tk
 
+global colors
+colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D64",64:"#F46146"}
+
 def init_ui(size):
     global window
     global ui_board
@@ -19,7 +22,8 @@ def update_ui(board):
     for row in ui_board:
         for label_iterator in range(0,len(row)):
             new_value = board[row_iterator][label_iterator]
-            ui_board[row_iterator][label_iterator].config(text=new_value)
-            print("update" + str(new_value))
-            # TODO: LOTS OF IFS FOR VALUE COLORS
+            try:
+              ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
+            except KeyError:
+                ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
         row_iterator += 1
