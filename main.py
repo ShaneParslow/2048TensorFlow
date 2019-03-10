@@ -11,5 +11,7 @@ ui.init_ui(t48)
 
 while True:
     print(np.matrix(t48.board))
-    ui.update_ui(t48)
-    tk.mainloop()
+    while True:
+        ui.update_ui(t48)
+        ui.window.update_idletasks()
+        ui.window.update()
