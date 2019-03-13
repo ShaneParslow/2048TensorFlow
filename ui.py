@@ -1,7 +1,7 @@
 import tkinter as tk
 
 global colors
-colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D64",64:"#F46146",128:"#EDCF72",256:"#EDCC61",512:"#EDC850",1024:"#E2B913",2048:" #ECC400"}
+colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D64",64:"#F46146",128:"#EDCF72",256:"#EDCC61",512:"#EDC850",1024:"#E2B913",2048:"#ECC400"}
 
 def init_ui(game):
     global window
