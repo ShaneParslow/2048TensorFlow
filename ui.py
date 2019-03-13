@@ -33,7 +33,11 @@ def update_ui(game):
         for label_iterator in range(0,len(row)):
             new_value = game.board[row_iterator][label_iterator]
             try:
-              ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
+                # 0 tiles should be blank
+                if new_value == 0:
+                    ui_board[row_iterator][label_iterator].config(text=" ",bg=colors[new_value])
+                else:
+                    ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
             # If color is not in dictionary fallback to red
             except KeyError:
                 ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
