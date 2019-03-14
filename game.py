@@ -11,6 +11,7 @@ class Twenty48():
         """
         self.size = dimensions
         self.score = 0
+        self.hasLost = False
         # Create empty board filled with zeroes of size provided
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         # Create initial two random tiles
@@ -36,6 +37,11 @@ class Twenty48():
                     break
         return True
 
+    def can_move(self):
+        """Determines if any moves can be made by running shifters on 'test mode'
+        """
+        pass
+
     def shift_up(self):
         newBoard = list(self.board)
         score_to_add = 0
@@ -59,11 +65,11 @@ class Twenty48():
         # See if any movement has occured. If it has, add tiles and check for loss.
         if newBoard != self.board:
             self.board = newBoard
-            if self.add_to_board(1) == True:
+            self.add_to_board(1)
+            if self.can_move() == True:
                 self.score += score_to_add
-                return True
             else:
-                return False
+                self.hasLost = True
 
     def shift_right(self):
         newBoard = list(self.board)
@@ -84,11 +90,11 @@ class Twenty48():
         # See if any movement has occured. If it has, add tiles and check for loss.
         if newBoard != self.board:
             self.board = newBoard
-            if self.add_to_board(1) == True:
+            self.add_to_board(1)
+            if self.can_move() == True:
                 self.score += score_to_add
-                return True
             else:
-                return False
+                self.hasLost = True
 
     def shift_down(self):
         newBoard = list(self.board)
@@ -113,11 +119,11 @@ class Twenty48():
         # See if any movement has occured. If it has, add tiles and check for loss.
         if newBoard != self.board:
             self.board = newBoard
-            if self.add_to_board(1) == True:
+            self.add_to_board(1)
+            if self.can_move() == True:
                 self.score += score_to_add
-                return True
             else:
-                return False
+                self.hasLost = True
 
     def shift_left(self):
         newBoard = list(self.board)
@@ -138,8 +144,8 @@ class Twenty48():
         # See if any movement has occured. If it has, add tiles and check for loss.
         if newBoard != self.board:
             self.board = newBoard
-            if self.add_to_board(1) == True:
+            self.add_to_board(1)
+            if self.can_move() == True:
                 self.score += score_to_add
-                return True
             else:
-                return False
+                self.hasLost = True
