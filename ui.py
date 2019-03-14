@@ -17,7 +17,7 @@ def init_ui(game):
         # Make rows fill up extra space
         window.grid_rowconfigure(row_iterator,minsize=50,weight=1)
         for label_iterator in range(0,len(row)):
-            ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator)
+            ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator,sticky="nsew")
             window.grid_columnconfigure(label_iterator,minsize=50,weight=1)
         row_iterator += 1
     # Create score label at bottom of screen
