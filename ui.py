@@ -1,7 +1,7 @@
 import tkinter as tk
 
 global colors
-colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D64",64:"#F46146"}
+colors = {0:"#CCC0B3",2:"#EDE3DA",4:"#ECDFC8",8:"#F1B07C",16:"#F39568",32:"#F47D64",64:"#F46146",128:"#EDCF72",256:"#EDCC61",512:"#EDC850",1024:"#E2B913",2048:"#ECC400"}
 
 def init_ui(game):
     global window
@@ -14,8 +14,11 @@ def init_ui(game):
     # Setup geometry managers for each label in ui_board
     row_iterator = 0
     for row in ui_board:
+        # Make rows fill up extra space
+        window.grid_rowconfigure(row_iterator,minsize=50,weight=1)
         for label_iterator in range(0,len(row)):
-            ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator,ipadx=10,ipady=10)
+            ui_board[row_iterator][label_iterator].grid(row=row_iterator,column=label_iterator,sticky="nsew")
+            window.grid_columnconfigure(label_iterator,minsize=50,weight=1)
         row_iterator += 1
     # Create score label at bottom of screen
     score = tk.Label(text=game.score+1)
@@ -33,7 +36,11 @@ def update_ui(game):
         for label_iterator in range(0,len(row)):
             new_value = game.board[row_iterator][label_iterator]
             try:
-              ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
+                # 0 tiles should be blank
+                if new_value == 0:
+                    ui_board[row_iterator][label_iterator].config(text=" ",bg=colors[new_value])
+                else:
+                    ui_board[row_iterator][label_iterator].config(text=new_value,bg=colors[new_value])
             # If color is not in dictionary fallback to red
             except KeyError:
                 ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
