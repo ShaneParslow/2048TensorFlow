@@ -40,9 +40,12 @@ class Twenty48():
     def can_move(self):
         """Determines if any moves can be made by running shifters on 'test mode'
         """
-        pass
+        if self.shift_up(testRun=True) or self.shift_right(testRun=True) or self.shift_down(testRun=True) or self.shift_left(testRun=True):
+            return  True
+        else:
+            return False
 
-    def shift_up(self):
+    def shift_up(self,testRun=False):
         newBoard = list(self.board)
         score_to_add = 0
         # Invert list to make this the same problem as moving horizontally
@@ -63,15 +66,16 @@ class Twenty48():
         newBoard = np.transpose(newBoard)
         newBoard = newBoard.tolist()
         # See if any movement has occured. If it has, add tiles and check for loss.
-        if newBoard != self.board:
+        if newBoard != self.board and not testRun:
             self.board = newBoard
             self.add_to_board(1)
             if self.can_move() == True:
                 self.score += score_to_add
             else:
                 self.hasLost = True
+        if testRun and newBoard != self.board: return True # Can any tiles move?
 
-    def shift_right(self):
+    def shift_right(self,testRun=False):
         newBoard = list(self.board)
         score_to_add = 0
         for row_iterator in range(0,len(newBoard)):
@@ -88,15 +92,16 @@ class Twenty48():
                     # Sort again
                     newBoard[row_iterator] = sorted(newBoard[row_iterator], key=lambda x: x == 0, reverse=True)  
         # See if any movement has occured. If it has, add tiles and check for loss.
-        if newBoard != self.board:
+        if newBoard != self.board and not testRun:
             self.board = newBoard
             self.add_to_board(1)
             if self.can_move() == True:
                 self.score += score_to_add
             else:
                 self.hasLost = True
+        if testRun and newBoard != self.board: return True # Can any tiles move?
 
-    def shift_down(self):
+    def shift_down(self,testRun=False):
         newBoard = list(self.board)
         score_to_add = 0
         # Invert list to make this the same problem as moving horizontally
@@ -117,15 +122,16 @@ class Twenty48():
         newBoard = np.transpose(newBoard)
         newBoard = newBoard.tolist()
         # See if any movement has occured. If it has, add tiles and check for loss.
-        if newBoard != self.board:
+        if newBoard != self.board and not testRun:
             self.board = newBoard
             self.add_to_board(1)
             if self.can_move() == True:
                 self.score += score_to_add
             else:
                 self.hasLost = True
+        if testRun and newBoard != self.board: return True # Can any tiles move?
 
-    def shift_left(self):
+    def shift_left(self,testRun=False):
         newBoard = list(self.board)
         score_to_add = 0
         for row_iterator in range(0,len(newBoard)):
@@ -142,10 +148,12 @@ class Twenty48():
                     # Sort again
                     newBoard[row_iterator] = sorted(newBoard[row_iterator], key=lambda x: x == 0)  
         # See if any movement has occured. If it has, add tiles and check for loss.
-        if newBoard != self.board:
+        if newBoard != self.board and not testRun:
             self.board = newBoard
             self.add_to_board(1)
             if self.can_move() == True:
                 self.score += score_to_add
             else:
                 self.hasLost = True
+        if testRun and newBoard != self.board: return True # Can any tiles move?
+        
