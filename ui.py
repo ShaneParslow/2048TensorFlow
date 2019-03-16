@@ -45,4 +45,4 @@ def update_ui(game):
             except KeyError:
                 ui_board[row_iterator][label_iterator].config(text=new_value,bg="#FF0000")
         row_iterator += 1
-    score.config(text=game.score)
+    score.config(text="Score: " + str(game.score))
