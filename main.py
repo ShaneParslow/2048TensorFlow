@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
+import numpy as np  #Seemingly only required for windows
+import tkinter as tk
 
-import tensorflow as tf
-import numpy as np
+import game
+import ui
 
-class twenty48():
-    def __init__(self, size):
-        #create empty board filled with zeroes of size provided
-        self.board = [[0] * size] * size
 
-game = twenty48(3)
-print(np.matrix(game.board))
+t48 = game.Twenty48()
+ui.init_ui(t48)
+
+print(np.matrix(t48.board))
+while True:
+    ui.update_ui(t48)
+    ui.window.update_idletasks()
+    ui.window.update()
+    if t48.hasLost == True:
+        break
+# Final update to show most recent move
+ui.update_ui(t48)
+tk.Label(ui.window,text="You lost").grid(row=t48.size,column=1)
+# Make sure window doesn't freeze
+while True:
+    ui.window.update_idletasks()
+    ui.window.update()
