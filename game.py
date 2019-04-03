@@ -1,6 +1,7 @@
 import numpy as np
 
-class Twenty48():
+
+class Twenty48:
     """Simple 2048 game played on a matrix."""
 
     def __init__(self, dimensions=4):
@@ -40,7 +41,7 @@ class Twenty48():
         """Determines if any moves can be made by running shifters on 'test mode'
         """
         if self.shift_up(testRun=True) or self.shift_right(testRun=True) or self.shift_down(testRun=True) or self.shift_left(testRun=True):
-            return  True
+            return True
         else:
             return False
 
@@ -155,4 +156,3 @@ class Twenty48():
             else:
                 self.hasLost = True
         if testRun and newBoard != self.board: return True # Can any tiles move?
-        

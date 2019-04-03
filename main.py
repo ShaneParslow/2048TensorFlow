@@ -14,7 +14,7 @@ while True:
     ui.update_ui(t48)
     ui.window.update_idletasks()
     ui.window.update()
-    if t48.hasLost == True:
+    if t48.hasLost:
         break
 # Final update to show most recent move
 ui.update_ui(t48)
