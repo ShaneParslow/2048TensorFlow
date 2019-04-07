@@ -1,6 +1,6 @@
 import keras as ks
 from rl.agents.dqn import DQNAgent
-from rl.policy import BoltzmannQPolicy
+from rl.policy import GreedyQPolicy
 from rl.memory import SequentialMemory
 
 import t48_env
@@ -9,26 +9,28 @@ import t48_env
 def init_network():
     # Keras initial model and layers
     model = ks.Sequential()
-    model.add(ks.layers.Dense(64, input_shape=(1, 4, 4), activation="relu"))  # Hidden layer 1
-    #model.add(ks.layers.Dense(64, activation="relu"))  # Hidden layer 2
-    #model.add(ks.layers.Dense(64, activation="relu"))  # Hidden layer 3
+    model.add(ks.layers.Dense(16, input_shape=(1, 4, 4), activation="relu"))  # Hidden layer 1
+    model.add(ks.layers.Dense(16, activation="relu"))  # Hidden layer 2
     model.add(ks.layers.Dense(1, activation="linear"))  # 1 list of 4 possible movements for output
     model.add(ks.layers.Flatten())
 
     print(model.summary())
 
     memory = SequentialMemory(limit=50000, window_length=1)
-    policy = BoltzmannQPolicy()
-    agent = DQNAgent(model=model, nb_actions=4, memory=memory, nb_steps_warmup=500,
+    policy = GreedyQPolicy()  # THIS MIGHT BE WRONG
+    agent = DQNAgent(model=model, nb_actions=4, memory=memory, nb_steps_warmup=100,
                      target_model_update=1e-2, policy=policy)
-    agent.compile(ks.optimizers.Adam(lr=1e-3), metrics=['mae'])
+    agent.compile(ks.optimizers.Adam(lr=1e-3))
     return agent
 
 
 def train_network(agent):
     env = t48_env.Twenty48Gym()
-    agent.fit(env, nb_steps=100000)
+    agent.fit(env, nb_steps=50000)
+    return env
 
 
-workpls = init_network()
-train_network(workpls)
+dqn_agent = init_network()
+gym_env = train_network(dqn_agent)
+dqn_agent.save_weights('dqn_{}_weights.h5f'.format("irdk"), overwrite=True)
+dqn_agent.test(gym_env, nb_episodes=5, visualize=True)
