@@ -1,6 +1,6 @@
 import keras as ks
 from rl.agents.dqn import DQNAgent
-from rl.policy import GreedyQPolicy
+from rl.policy import EpsGreedyQPolicy
 from rl.memory import SequentialMemory
 
 import t48_env
@@ -17,7 +17,7 @@ def init_network():
     print(model.summary())
 
     memory = SequentialMemory(limit=50000, window_length=1)
-    policy = GreedyQPolicy()  # THIS MIGHT BE WRONG
+    policy = EpsGreedyQPolicy()  # THIS MIGHT BE WRONG
     agent = DQNAgent(model=model, nb_actions=4, memory=memory, nb_steps_warmup=100,
                      target_model_update=1e-2, policy=policy)
     agent.compile(ks.optimizers.Adam(lr=1e-3))
@@ -26,11 +26,15 @@ def init_network():
 
 def train_network(agent):
     env = t48_env.Twenty48Gym()
-    agent.fit(env, nb_steps=50000)
+    agent.fit(env, nb_steps=1000000, visualize=True)
     return env
 
 
 dqn_agent = init_network()
-gym_env = train_network(dqn_agent)
+try:
+    gym_env = train_network(dqn_agent)
+except KeyboardInterrupt:
+    dqn_agent.save_weights('dqn_{}_weights.h5f'.format("irdk"), overwrite=True)
+    exit()
 dqn_agent.save_weights('dqn_{}_weights.h5f'.format("irdk"), overwrite=True)
 dqn_agent.test(gym_env, nb_episodes=5, visualize=True)

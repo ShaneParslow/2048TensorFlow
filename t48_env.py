@@ -34,7 +34,7 @@ class Twenty48Gym(gym.Env):
             reward = -1
             self.inv_move += 1
 
-        return np.array(self.game_instance.board), reward, self.game_instance.hasLost or self.inv_move > 10, {}
+        return np.array(self.game_instance.board), reward, self.game_instance.hasLost or self.inv_move > 500, {}
 
     def reset(self):
         self.inv_move = 0
@@ -45,4 +45,4 @@ class Twenty48Gym(gym.Env):
         ui.update_ui(self.game_instance)
         ui.window.update_idletasks()
         ui.window.update()
-        time.sleep(0.1)
+        #time.sleep(0.1)
