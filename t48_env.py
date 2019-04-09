@@ -17,6 +17,8 @@ class Twenty48Gym(gym.Env):
     def step(self, action):
         previous_score = int(self.game_instance.score)
         previous_board = list(self.game_instance.board)
+
+        #  Make move based on network output  #
         if action == 0:
             self.game_instance.shift_up()
         elif action == 1:
@@ -26,11 +28,15 @@ class Twenty48Gym(gym.Env):
         elif action == 3:
             self.game_instance.shift_left()
         else:
-            raise ValueError("Invalid move {}".format(action))
+            raise ValueError("Invalid move {}".format(action))  # Network move out of bounds
+
+        #  Reward calculation  #
         if previous_board != list(self.game_instance.board):  # Reward if a proper move was made
-            reward = (self.game_instance.score - previous_score)
-            self.inv_move = 0
-        else:  # Move did nothing
+            reward = self.game_instance.score - previous_score  # Base reward for score increase
+            reward += 20 / np.count_nonzero(self.game_instance.board)  # Bonus reward for fewer tiles
+
+            self.inv_move = 0  # Reset network kill counter
+        else:  # Punish for move with no effect
             reward = -1
             self.inv_move += 1
 
