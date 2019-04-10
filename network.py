@@ -26,7 +26,7 @@ def init_network():
 
 def train_network(agent):
     env = t48_env.Twenty48Gym()
-    agent.fit(env, nb_steps=float("inf"), visualize=True)
+    agent.fit(env, nb_steps=float("inf"), visualize=True, nb_max_episode_steps=0)
     return env
 
 

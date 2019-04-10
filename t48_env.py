@@ -1,7 +1,6 @@
 import numpy as np
 import gym
 import time
-from random import randint
 
 import game
 import ui
@@ -33,14 +32,15 @@ class Twenty48Gym(gym.Env):
         #  Reward calculation  #
         if previous_board != list(self.game_instance.board):  # Reward if a proper move was made
             reward = self.game_instance.score - previous_score  # Base reward for score increase
-            reward += 20 / np.count_nonzero(self.game_instance.board)  # Bonus reward for fewer tiles
+            reward += 100 / np.count_nonzero(self.game_instance.board)  # Bonus reward for fewer tiles
+            reward += np.matrix(self.game_instance.board).max()  # Bonus for largest tile
 
             self.inv_move = 0  # Reset network kill counter
         else:  # Punish for move with no effect
             reward = -1
             self.inv_move += 1
 
-        return np.array(self.game_instance.board), reward, self.game_instance.hasLost or self.inv_move > 500, {}
+        return self.game_instance.board, reward, self.game_instance.hasLost or self.inv_move > 500, {}
 
     def reset(self):
         self.inv_move = 0
