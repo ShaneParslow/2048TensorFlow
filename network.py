@@ -2,6 +2,7 @@ import keras as ks
 from rl.agents.dqn import DQNAgent
 from rl.policy import EpsGreedyQPolicy
 from rl.memory import SequentialMemory
+from tkinter import TclError
 
 import t48_env
 
@@ -33,8 +34,8 @@ def train_network(agent):
 dqn_agent = init_network()
 try:
     gym_env = train_network(dqn_agent)
-except KeyboardInterrupt:
-    dqn_agent.save_weights('dqn_{}_weights.h5f'.format("irdk"), overwrite=True)
+except (KeyboardInterrupt, TclError):
+    dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
     exit()
-dqn_agent.save_weights('dqn_{}_weights.h5f'.format("irdk"), overwrite=True)
+dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
 dqn_agent.test(gym_env, nb_episodes=5, visualize=True)
