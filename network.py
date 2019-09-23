@@ -34,7 +34,7 @@ def init_network():
 
 
 def train_network(agent):
-    agent.fit(gym_env, nb_steps=float("inf"), visualize=True, nb_max_episode_steps=0)
+    agent.fit(gym_env, nb_steps=float(30000), visualize=True, nb_max_episode_steps=0)
     return gym_env
 
 
