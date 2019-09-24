@@ -1,3 +1,5 @@
+# FUCK THIS FUCKING FUCK PIECE OF SHIT FUCK #
+
 import keras as ks
 from rl.agents.dqn import DQNAgent
 from rl.policy import EpsGreedyQPolicy
@@ -13,16 +15,39 @@ gym_env = t48_env.Twenty48Gym()
 def init_network():
     # Keras initial model and layers
     model = ks.Sequential()
-    model.add(ks.layers.Dense(100, input_shape=(1, 4, 4), activation="relu"))  # Hidden layer 1
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 2
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 3
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 4
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 5
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 6
-    model.add(ks.layers.Dense(100, activation="relu"))  # Hidden layer 7
-    model.add(ks.layers.Dense(1, activation="linear"))  # 1 list of 4 possible movements for output
-    model.add(ks.layers.Flatten())
-
+    model.add(ks.layers.Flatten(input_shape=(1,4,4)))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(100))
+    model.add(ks.layers.Activation('relu'))
+    model.add(ks.layers.Dense(4))
+    model.add(ks.layers.Activation('linear'))
     print(model.summary())
 
     memory = SequentialMemory(limit=50000, window_length=1)
@@ -50,3 +75,5 @@ except (KeyboardInterrupt, TclError):
     exit()
 dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
 dqn_agent.test(gym_env, nb_episodes=5, visualize=True)
+
+# TODO: change back to average
