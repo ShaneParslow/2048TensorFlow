@@ -74,4 +74,6 @@ except (KeyboardInterrupt, TclError):
     plt.show()
     exit()
 dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
+plt.scatter(range(1, len(gym_env.avg_scores) + 1), gym_env.avg_scores)
+plt.show()
 dqn_agent.test(gym_env, nb_episodes=5, visualize=True)
