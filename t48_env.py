@@ -12,9 +12,8 @@ class Twenty48Gym(gym.Env):
         self.game_instance = game.Twenty48()
         ui.init_ui(self.game_instance)
         self.inv_move = 0
-        self.total_score = 0  # Total score across all games
+        self.scores = []  # List of 100 most recent scores
         self.avg_scores = []  # List of average score for all tests
-        self.num_instances = 1  # Number of times the board has been reset
 
     def step(self, action):
         previous_score = int(self.game_instance.score)
@@ -44,10 +43,10 @@ class Twenty48Gym(gym.Env):
 
     def reset(self):
         self.inv_move = 0
-        self.total_score += self.game_instance.score
+        self.scores.append(self.game_instance.score)
+        self.scores = self.scores[-100:]
         self.game_instance = game.Twenty48()  # Reinstantiate to reset
-        self.num_instances += 1
-        current_avg = self.total_score/self.num_instances
+        current_avg = np.average(self.scores)
         self.avg_scores.append(current_avg)
         print("\n{}".format(current_avg))
         return np.array(self.game_instance.board)
