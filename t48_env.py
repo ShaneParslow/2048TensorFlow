@@ -33,7 +33,7 @@ class Twenty48Gym(gym.Env):
 
         #  Reward calculation  #
         if previous_board != list(self.game_instance.board):  # Reward if a proper move was made
-            reward = 1
+            reward = self.game_instance.score - previous_score
             self.inv_move = 0  # Reset network kill counter
         else:  # Record move with no effect
             self.inv_move += 1
