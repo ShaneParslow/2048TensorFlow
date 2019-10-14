@@ -3,14 +3,12 @@ import gym
 import time
 
 import game
-import ui
 
 
 class Twenty48Gym(gym.Env):
 
     def __init__(self):
         self.game_instance = game.Twenty48()
-        ui.init_ui(self.game_instance)
         self.inv_move = 0
         self.scores = []  # List of 100 most recent scores
         self.avg_scores = []  # List of average score for all tests
@@ -52,7 +50,9 @@ class Twenty48Gym(gym.Env):
         return np.array(self.game_instance.board)
 
     def render(self, mode='human'):
-        ui.update_ui(self.game_instance)
-        ui.window.update_idletasks()
-        ui.window.update()
+        if(mode==human):
+            import ui 
+       	    ui.update_ui(self.game_instance)
+            ui.window.update_idletasks()
+            ui.window.update()
         #time.sleep(0.1)

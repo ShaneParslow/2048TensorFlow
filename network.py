@@ -2,7 +2,6 @@ import keras as ks
 from rl.agents.dqn import DQNAgent
 from rl.policy import EpsGreedyQPolicy
 from rl.memory import SequentialMemory
-from tkinter import TclError
 import matplotlib.pyplot as plt
 import t48_env
 
@@ -34,14 +33,14 @@ def init_network():
 
 
 def train_network(agent):
-    agent.fit(gym_env, nb_steps=float(20000*35), visualize=True, nb_max_episode_steps=0)
+    agent.fit(gym_env, nb_steps=float(20000*35), visualize=False, nb_max_episode_steps=0)
     return gym_env
 
 
 dqn_agent = init_network()
 try:
     train_network(dqn_agent)
-except (KeyboardInterrupt, TclError):
+except (KeyboardInterrupt):
     dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
     # print(len(range(1, gym_env.num_instances)))
     # print(len(gym_env.avg_scores))
