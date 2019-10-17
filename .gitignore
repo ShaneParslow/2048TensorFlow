@@ -120,3 +120,6 @@ dmypy.json
 
 ### Python Patch ###
 .venv/
+.idea/
+
+*.h5f
