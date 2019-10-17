@@ -12,13 +12,13 @@ gym_env = t48_env.Twenty48Gym()
 def init_network():
     # Keras initial model and layers
     model = ks.Sequential()
-    model.add(ks.layers.Dense(512, input_shape=(1, 4, 4), activation="relu"))  # Hidden layer 1
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 2
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 3
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 4
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 5
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 6
-    model.add(ks.layers.Dense(512, activation="relu"))  # Hidden layer 7
+    model.add(ks.layers.Dense(1024, input_shape=(1, 4, 4), activation="relu"))  # Hidden layer 1
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 2
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 3
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 4
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 5
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 6
+    model.add(ks.layers.Dense(1024, activation="relu"))  # Hidden layer 7
     model.add(ks.layers.Dense(1, activation="linear"))  # 1 list of 4 possible movements for output
     model.add(ks.layers.Flatten())
 
@@ -40,7 +40,7 @@ def train_network(agent):
 dqn_agent = init_network()
 try:
     train_network(dqn_agent)
-except (KeyboardInterrupt):
+except KeyboardInterrupt:
     dqn_agent.save_weights('dqn_t48_weights.h5f', overwrite=True)
     # print(len(range(1, gym_env.num_instances)))
     # print(len(gym_env.avg_scores))

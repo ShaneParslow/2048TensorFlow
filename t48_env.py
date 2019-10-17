@@ -37,7 +37,7 @@ class Twenty48Gym(gym.Env):
             self.inv_move += 1
             reward = 0
 
-        return self.game_instance.board, reward, self.game_instance.hasLost or self.inv_move > 0, {}
+        return self.game_instance.board, reward, self.game_instance.hasLost or self.inv_move > 5, {}
 
     def reset(self):
         self.inv_move = 0
@@ -50,7 +50,7 @@ class Twenty48Gym(gym.Env):
         return np.array(self.game_instance.board)
 
     def render(self, mode='human'):
-        if(mode==human):
+        if(mode=="human"):
             import ui 
        	    ui.update_ui(self.game_instance)
             ui.window.update_idletasks()
