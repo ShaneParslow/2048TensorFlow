@@ -37,7 +37,7 @@ class Twenty48Gym(gym.Env):
             self.inv_move += 1
             reward = 0
 
-        return self.game_instance.board, reward, self.game_instance.hasLost or self.inv_move > 5, {}
+        return self.game_instance.board, reward, self.game_instance.hasLost or self.inv_move > 0, {}
 
     def reset(self):
         self.inv_move = 0
